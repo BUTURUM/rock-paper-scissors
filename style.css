@@ -1,0 +1,35 @@
+#hand-fight{
+  display: flex;
+  justify-content: space-between;
+  overflow-x: clip;
+}
+.hand-box{
+  width: 40%;
+  position: relative;
+  animation: shake 575ms ease-out 4;
+}
+.hand-box > img{
+  width: 100%;
+}
+.hand-box.right{
+  rotate: -45deg;
+}
+.hand-box.left{
+  scale: -1 1;
+  rotate: 45deg;
+}
+
+@keyframes shake {
+  from{
+    top: 0;
+  }
+  30%{
+    top: 3rem;
+  }
+  70%{
+    top: -2rem;
+  }
+  to{
+    top: 0;
+  }
+}
