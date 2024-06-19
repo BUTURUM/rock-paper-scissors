@@ -23,6 +23,8 @@ button svg{
 .hand-box{
   width: 40%;
   position: relative;
+}
+.hand-box.shaking{
   animation: shake 575ms ease-out 4;
 }
 .hand-box > img{
