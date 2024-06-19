@@ -1,6 +1,7 @@
 body{
   background-color: #4847C4;
   color: white;
+  font-family: 'Avenir';
 }
 button{
   background: none;
@@ -16,6 +17,8 @@ button svg{
   display: flex;
   justify-content: space-between;
   overflow-x: clip;
+  margin-bottom: 9vh;
+  margin-top: 2vh;
 }
 .hand-box{
   width: 40%;
@@ -37,7 +40,6 @@ button svg{
 #action-panel{
   display: flex;
   justify-content: space-evenly;
-  margin-top: 10vh;
 }
 .action-button{
   background-color: #363593;
@@ -55,6 +57,18 @@ button svg{
   width: 2rem;
   height: 2rem;
   vertical-align: middle;
+}
+
+/*play shit*/
+#play-panel{
+  text-align: center;
+  margin-top: 2rem;
+}
+#play-button{
+  color: white;
+  border: 2px white solid;
+  padding: .5rem 1rem;
+  border-radius: .25rem;
 }
 
 @keyframes shake {
