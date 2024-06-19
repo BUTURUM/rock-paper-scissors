@@ -2,7 +2,16 @@ body{
   background-color: #4847C4;
   color: white;
 }
+button{
+  background: none;
+  border: none;
+  font: inherit;
+}
+button svg{
+  pointer-events: none;
+}
 
+/*hands*/
 #hand-fight{
   display: flex;
   justify-content: space-between;
@@ -24,15 +33,39 @@ body{
   rotate: 45deg;
 }
 
+/*actions*/
+#action-panel{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10vh;
+}
+.action-button{
+  background-color: #363593;
+  padding: 1rem;
+  border-radius: 50%;
+}
+.action-button.selected{
+  background-color: #766CAA;
+}
+.action-button:disabled{
+  opacity: .5;
+}
+.action-button > svg{
+  fill: white;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+}
+
 @keyframes shake {
   from{
     top: 0;
   }
   30%{
-    top: 3rem;
+    top: 9vh;
   }
   70%{
-    top: -2rem;
+    top: -5vh;
   }
   to{
     top: 0;
