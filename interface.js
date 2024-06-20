@@ -14,6 +14,8 @@ const playButton = document.getElementById('play-button');
 const leftHand = document.querySelector('.hand-box.left');
 const rightHand = document.querySelector('.hand-box.right');
 const logTitle = document.getElementById('log-title');
+const yourScore = document.querySelector('.score-box.left > .score-count');
+const opponentScore = document.querySelector('.score-box.right > .score-count');
 
 leftHand.append(pictures.rock.cloneNode());
 rightHand.append(pictures.rock.cloneNode());
@@ -32,6 +34,10 @@ function resetActionPanel(){
   }
 }
 
+export function logOutcome(outcome){
+  logTitle.innerText = outcome;
+}
+
 function changeHand(el, hand){
   if(hand){
     el.replaceChildren(pictures[hand].cloneNode());
@@ -39,13 +45,11 @@ function changeHand(el, hand){
     el.replaceChildren(pictures.rock.cloneNode());
   }
 }
-
-export function logOutcome(outcome){
-  logTitle.innerText = outcome;
-}
-
 export const changeLeftHand = (hand) => changeHand(leftHand, hand);
 export const changeRightHand = (hand) => changeHand(rightHand, hand);
+
+export const updateYourScore = (newScore) => yourScore.innerText = newScore;
+export const updateOpponentScore = (newScore) => opponentScore.innerText = newScore;
 
 actionPanel.addEventListener('click', (event) => {
   if(event.target.tagName !== 'BUTTON'){
@@ -65,7 +69,7 @@ playButton.addEventListener('click', () => {
 
 timelineBus.addEventListener('start-battle', () => {
   logTitle.innerText = '';
-  
+
   leftHand.replaceChildren(pictures.rock.cloneNode());
   rightHand.replaceChildren(pictures.rock.cloneNode());
 

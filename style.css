@@ -12,10 +12,29 @@ button svg{
   pointer-events: none;
 }
 
+#score-panel{
+  display: flex;
+  justify-content: space-around;
+}
+.score-title{
+  font-size: medium;
+}
+.score-count{
+  font-size: 3rem;
+}
+.score-box{
+  width: 6rem;
+  background-color: white;
+  color: #22225E;
+  text-align: center;
+  border-radius: .25rem;
+}
+
 #log-title{
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
+  margin-top: 1rem;
 }
 #log-title:empty::before{
   content: "\A0";

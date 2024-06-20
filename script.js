@@ -1,7 +1,11 @@
-import {actionBus, changeLeftHand, changeRightHand, logOutcome} from './interface.js';
+import {
+  actionBus, changeLeftHand, changeRightHand, logOutcome, updateOpponentScore, updateYourScore
+} from './interface.js';
 import timelineBus from './timeline-bus.js';
 
 let userHandChoice = null;
+let playerScore = 0;
+let computerScore = 0;
 
 function choseRandomHand(){
   const handSequence = ['rock', 'paper', 'scissors'];
@@ -39,8 +43,24 @@ timelineBus.addEventListener('stop-battle', () => {
   if(userHandChoice){
     let outcome = determineOutcome(userHandChoice, computerHandChoice);
     changeLeftHand(userHandChoice);
-    logOutcome(outcome[0].toUpperCase() + outcome.slice(1) + '!');
+    switch(outcome){
+      case 'victory':
+        logOutcome('You win!');
+        playerScore += 1;
+        break
+      case 'defeat':
+        logOutcome('You lose!');
+        computerScore += 1;
+        break
+      case 'draw':
+        logOutcome('It is draw!');
+        break
+    }
   } else{
     logOutcome("You didn't chose hand!");
+    computerHandChoice += 1;
   }
+  
+  updateOpponentScore(computerHandChoice);
+  updateYourScore(playerScore);
 });
