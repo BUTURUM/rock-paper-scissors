@@ -1,4 +1,4 @@
-import {actionBus, changeLeftHand, changeRightHand} from './interface.js';
+import {actionBus, changeLeftHand, changeRightHand, logOutcome} from './interface.js';
 import timelineBus from './timeline-bus.js';
 
 let userHandChoice = null;
@@ -39,8 +39,8 @@ timelineBus.addEventListener('stop-battle', () => {
   if(userHandChoice){
     let outcome = determineOutcome(userHandChoice, computerHandChoice);
     changeLeftHand(userHandChoice);
-    alert(outcome[0].toUpperCase() + outcome.slice(1) + '!');
+    logOutcome(outcome[0].toUpperCase() + outcome.slice(1) + '!');
   } else{
-    alert("You didn't chose hand!");
+    logOutcome("You didn't chose hand!");
   }
 });

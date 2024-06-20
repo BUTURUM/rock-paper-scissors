@@ -13,6 +13,7 @@ const actionPanel = document.getElementById('action-panel');
 const playButton = document.getElementById('play-button');
 const leftHand = document.querySelector('.hand-box.left');
 const rightHand = document.querySelector('.hand-box.right');
+const logTitle = document.getElementById('log-title');
 
 leftHand.append(pictures.rock.cloneNode());
 rightHand.append(pictures.rock.cloneNode());
@@ -39,6 +40,10 @@ function changeHand(el, hand){
   }
 }
 
+export function logOutcome(outcome){
+  logTitle.innerText = outcome;
+}
+
 export const changeLeftHand = (hand) => changeHand(leftHand, hand);
 export const changeRightHand = (hand) => changeHand(rightHand, hand);
 
@@ -59,6 +64,8 @@ playButton.addEventListener('click', () => {
 });
 
 timelineBus.addEventListener('start-battle', () => {
+  logTitle.innerText = '';
+  
   leftHand.replaceChildren(pictures.rock.cloneNode());
   rightHand.replaceChildren(pictures.rock.cloneNode());
 
