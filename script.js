@@ -1,66 +1,15 @@
-import {
-  actionBus, changeLeftHand, changeRightHand, logOutcome, updateOpponentScore, updateYourScore
-} from './interface.js';
-import timelineBus from './timeline-bus.js';
+import {eventBus, logOutcome, changeComputerHand, changeUserHand} from "./view.js";
+import model from "./model.js";
 
-let userHandChoice = null;
-let playerScore = 0;
-let computerScore = 0;
-
-function choseRandomHand(){
-  const handSequence = ['rock', 'paper', 'scissors'];
-  return handSequence[Math.floor(Math.random() * handSequence.length)];
-}
-
-function determineOutcome(yourHandChoice, enemyHandChoice){
-  if(yourHandChoice === enemyHandChoice){
-    return 'draw';
-  }
-  switch(enemyHandChoice){
-    case 'rock':
-      if(yourHandChoice === 'paper') return 'victory';
-      break
-    case 'paper':
-      if(yourHandChoice === 'scissors') return 'victory';
-      break
-    case 'scissors':
-      if(yourHandChoice === 'rock') return 'victory';
-  }
-  return 'defeat';
-}
-
-actionBus.addEventListener('hand-chosen', () => {
-  userHandChoice = event.detail.hand;
+eventBus.addEventListener('chose-hand', (event) => {
+  model.choseHand(event.detail.hand)
 });
+eventBus.addEventListener('start-round', () => model.resetHand());
 
-timelineBus.addEventListener('start-battle', () => {
-  userHandChoice = null;
-});
-timelineBus.addEventListener('stop-battle', () => {
-  let computerHandChoice = choseRandomHand();
-  changeRightHand(computerHandChoice);
+eventBus.addEventListener('stop-round', () => {
+  changeUserHand(model.user.handChoice);
+  changeComputerHand(model.computer.handChoice);
 
-  if(userHandChoice){
-    let outcome = determineOutcome(userHandChoice, computerHandChoice);
-    changeLeftHand(userHandChoice);
-    switch(outcome){
-      case 'victory':
-        logOutcome('You win!');
-        playerScore += 1;
-        break
-      case 'defeat':
-        logOutcome('You lose!');
-        computerScore += 1;
-        break
-      case 'draw':
-        logOutcome('It is draw!');
-        break
-    }
-  } else{
-    logOutcome("You didn't chose hand!");
-    computerHandChoice += 1;
-  }
-  
-  updateOpponentScore(computerHandChoice);
-  updateYourScore(playerScore);
+  let outcome = model.play();
+  logOutcome(outcome, model.user.score, model.computer.score);
 });
